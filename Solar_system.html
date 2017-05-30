@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Solar System</title>
+
+<style type="text/css">
+
+body{
+
+	font-weight: bold;
+	padding-left: 50px;
+	padding-top: 30px;
+}
+
+ /*Star*/
+   #sun
+  {
+  	position: absolute;
+	margin-left: 880px;
+    margin-top: 350px;
+  	height:100px;
+  	width: 100px;
+  	background-color: rgb(253,184,10);/*giving div a sun like color */
+    border-radius: 50px;
+
+  }
+/*Red planet orbit*/
+ #orb1{
+ 	position: absolute;
+    height:210px;
+    width: 210px;
+  	margin-top:-56px;
+	margin-left:-56px;
+  	border-style: solid;
+  	border-radius: 105px;
+  	border-width:1px;
+  	border-color: red
+ }
+ /*Blue planet orbit*/
+ #orb2{
+ 	position: absolute;
+    height:398px;
+    width: 398px;
+  	margin-top:-149px;
+	margin-left:-149px;
+  	border-style: solid;
+  	border-radius: 199px;
+  	border-width:2px;
+ 	border-color:blue;
+ }
+ /*Green planet orbit*/
+ #orb3{
+ 	position: absolute;
+    height:610px;
+    width: 610px;
+  	margin-top:-256px;
+	margin-left:-256px;
+  	border-style: solid;
+  	border-radius: 305px;
+  	border-width:2px;
+  	border-color: green;
+ }
+  /*Red planet*/
+  #planet1
+  { /*Changing transform origin to center of sun to ensure revolution about it */
+	transform-origin:90px 90px 0px;
+ 	border-radius: 12px;
+ 	top:-40px;
+ 	left: -40px;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: red;
+	 /*Assinging an animmation*/
+	-webkit-animation-duration: 6s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+
+
+  }
+  /*Blue planet*/
+  #planet2
+  {/*Changing transform origin to center of sun to ensure revolution about it */
+	transform-origin:158px 158px 0px;
+	top:-108px;
+	left: -108px ;
+    border-radius: 15px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color:blue;
+   /*Assinging an animmation*/
+   -webkit-animation-duration: 9s;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-timing-function: linear ;
+
+
+  }
+   /*Green planet*/
+   #planet3
+   {/*Changing transform origin to center of sun to ensure revolution about it */
+	top:-200px;
+	left: -200px;
+    transform-origin:250px 250px 0px;
+    border-radius: 30px;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color:green;
+   /*Assinging an animmation*/
+   -webkit-animation-duration: 14s;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-timing-function: linear;
+	 -webkit-animation-play-state:running;
+   }
+
+ /*Planet rotates about z axis with respect to transformed origin*/
+  @-webkit-keyframes revolve
+  {
+
+
+   0%{
+   	-webkit-transform:rotateZ(0deg);
+   }
+   12.5%{
+   	-webkit-transform:rotateZ(45deg) ;
+
+   }
+    25%{
+   	-webkit-transform:rotateZ(90deg) ;
+
+   }
+ 37.5%{
+   	-webkit-transform:rotateZ(135deg) ;
+
+   }
+   50%{
+   	-webkit-transform:rotateZ(180deg) ;
+
+   }
+   62.5%{
+   	-webkit-transform:rotateZ(225deg) ;
+
+   }
+   75%{
+   	-webkit-transform:rotateZ(270deg) ;
+
+   }
+   87.5%{
+   	-webkit-transform:rotateZ(315deg) ;
+
+   }
+
+   100%{
+   		-webkit-transform:rotateZ(360deg) ;
+
+   }
+
+
+  }
+
+
+
+</style>
+
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+
+ <!-- Star -->
+  <div id="sun">
+ <!-- Red Planet Orbit -->
+ 	<div id="orb1">
+    </div>
+    <!-- Blue Planet Orbit -->
+    <div id="orb2">
+    </div>
+    <!-- Green Planet Orbit -->
+    <div id="orb3">
+    </div>
+   <!--  Red Planet -->
+    <div id="planet1">
+    </div>
+    <!--  Blue Planet -->
+    <div id="planet2">
+    </div>
+    <!--  Green Planet -->
+    <div id="planet3">
+    </div>
+  </div>
+
+ <!-- Control panel for red colored planet -->
+  Red Planet :
+  <button id="start" class="btn btn-primary" onclick="startrev1()">Start</button>
+  <button id="stop" class="btn btn-danger" onclick="stoprev1()">Stop</button>
+  <button id="reset" class="btn btn-info" onclick="resetrev1()">Reset</button><br><br><br>
+  <!-- Control panel for blue colored planet -->
+  Blue Planet :
+  <button id="start1" class="btn btn-primary" onclick="startrev2()">Start</button>
+  <button id="stop1" class="btn btn-danger" onclick="stoprev2()">Stop</button>
+  <button id="reset1" class="btn btn-info" onclick="resetrev2()">Reset</button><br><br><br>
+<!-- Control panel for green colored planet -->
+  Green Planet:
+  <button id="start2" class="btn btn-primary" onclick="startrev3()">Start</button>
+  <button id="stop2" class="btn btn-danger" onclick="stoprev3()">Stop</button>
+  <button id="reset2" class="btn btn-info" onclick="resetrev3()">Reset</button>
+
+
+
+<script type="text/javascript">
+
+    //Red planet starts revolving
+	function startrev1()
+	{
+
+		document.getElementById("planet1").style.animationName="revolve";
+		document.getElementById("planet1").style.animationPlayState="running";
+	}
+//Red planet is reset to original location
+	function resetrev1()
+	{
+
+		document.getElementById("planet1").style.animationName="";
+	}
+//Red planet stops revolving
+	function stoprev1()
+	{
+
+		document.getElementById("planet1").style.animationPlayState="paused";
+	}
+
+	//Blue planet starts revolving
+	function startrev2()
+	{
+
+		document.getElementById("planet2").style.animationName="revolve";
+		document.getElementById("planet2").style.animationPlayState="running";
+	}
+//Blue planet is reset to original position
+	function resetrev2()
+	{
+
+		document.getElementById("planet2").style.animationName="";
+	}
+//Blue planet stops revolving
+	function stoprev2()
+	{
+
+		document.getElementById("planet2").style.animationPlayState="paused";
+	}
+
+//Green planet starts revolving
+	function startrev3()
+	{
+
+		document.getElementById("planet3").style.animationName="revolve";
+		document.getElementById("planet3").style.animationPlayState="running";
+	}
+//Green planet is reset to original position
+		function resetrev3()
+	{
+
+		document.getElementById("planet3").style.animationName="";
+	}
+		//Green planet stops revolving
+
+		function stoprev3()
+	{
+		//document.getElementById("planet3").style.animationName="paused";
+		document.getElementById("planet3").style.animationPlayState="paused";
+	}
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
