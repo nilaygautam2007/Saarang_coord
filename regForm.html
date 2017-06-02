@@ -104,12 +104,12 @@
   	</div>
 
 
-  		<div class="form-group">
+  	<div class="form-group">
   		<label class="control-label" for="SelectEvent">Please Select desired Event</label>
-  		</div>
-  		<div class="form-group">
-  			<select name="sevent" ng-model="sevent" class="form-control" id="SelectEvent">
-  				<option>Events</option>
+  	</div>
+  	<div class="form-group">
+  		<select name="sevent" ng-model="sevent" class="form-control" id="SelectEvent">
+  			<option>Events</option>
       			<option>Treasure Hunt</option>
       			<option>Laser Tag</option>
       			<option>Tarang</option>
@@ -118,19 +118,17 @@
       			<option>Panache</option>
       		</select>
 
-      		<span class="err">
-  		<label ng-show="submitted&&regForm.eve.$error.required">&nbsp;Please select an event</label>
-  		</span>
-  		</div>
+      
+  	</div>
 
   
 
-  		<div class="form-group"> 
-   			<div class="col-sm-offset-2 col-sm-10">
+  	<div class="form-group"> 
+   		<div class="col-sm-offset-2 col-sm-10">
       			<button type="submit" class="btn btn-primary" ng-click="register()">Submit</button>
     		</div>
- 		</div>
- 		 <button class="btn btn-success" ng-show="regForm.$valid&&submitted" disabled="true">Submitted Succcesfully</button>
+ 	</div>
+ 		
 
   	
 
