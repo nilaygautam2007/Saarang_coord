@@ -24,10 +24,17 @@
 		.err{
 			color: red;
 		}
+	    
+	input::-webkit-outer-spin-button,
+   	input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
     </style>
 
   </head>
-  <body>
+  <body background="ep_naturalwhite.png">
   	
   	<h1 align="center">REGISTRATION FORM</h1><br>
   	
@@ -44,15 +51,17 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-5"> 
-      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-model="fname" required>
+      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" required>
     		</div>
     		<div class="col-sm-5"> 
-      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-model="lname" required>
+      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" required>
     		</div>
-    		<span class="err" ng-show="(regForm.fname.$touched || regForm.lname.$touched) && (regForm.fname.$invalid || regForm.lname.$invalid)">The field is required. </span>
-  		</div>
+    		<span class="err" ng-show="(regForm.fname.$touched || regForm.lname.$touched) && (regForm.fname.$error.required || regForm.lname.$error.required)">The field is required. </span><br>
+        	<br>
+		<span class="err" ng-show="(regForm.fname.$error.pattern ||regForm.lname.$error.pattern)"> Only Alphabets allowed. </span>
+  	</div>
 
-  		<div class="form-group">
+  	<div class="form-group">
     		<label class="control-label" for="Saarangid">Saarang ID</label>
     	</div>
     	<div class="form-group">
@@ -66,21 +75,22 @@
       			</span>
     		</div>
     	
-  		</div>
+  	</div>
 
   		
-  		<div class="form-group">
+  	<div class="form-group">
     		<label class="control-label" for="mobno">Mobile Number</label>
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10"> 
-      			<input type="text" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" placeholder="XXXXXXXXXX">
-      		<span class="err" ng-if="!regForm.mobno.$valid ">Enter 10 digit no.</span>
+      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX">
+      			<span class="err" ng-show="(regForm.mobno.$error.required || regForm.mobno.$error.number)" >Only Numeric Digits allowed.</span>
+          		<span class="err" ng-show="((regForm.mobno.$error.minlength || regForm.mobno.$error.maxlength) && regForm.mobno.$dirty)"> Mobile no. should be of 10 digits </span>
 
     		</div>
-  		</div>
+  	</div>
 
-  		<div class="form-group">
+  	<div class="form-group">
     		<label class="control-label" for="email">Enter Email Id</label>
     	</div>
     	<div class="form-group">
@@ -89,9 +99,9 @@
       			<span class="err" ng-show="regForm.email.$dirty && regForm.email.$invalid">
   				<span ng-show="regForm.email.$error.required">Email is required.</span>
   				<span ng-show="regForm.email.$error.email">Invalid email address.</span>
-  				</span>
+  			</span>
     		</div>
-  		</div>
+  	</div>
 
 
   		<div class="form-group">
