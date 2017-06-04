@@ -45,6 +45,7 @@
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  background: #EEE;
   }
     </style>
 
@@ -100,7 +101,7 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.mobno.$invalid && regForm.mobno.$touched }">
-      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" >
+      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="Enter a 10 digit Mobile No." >
       			<!-- Error Messages. -->
 			<span class="err" ng-show="(regForm.mobno.$error.required && regForm.mobno.$touched)" >Field should not be blank.</span>
             		<span class="err" ng-show="regForm.mobno.$error.number"> Only Numeric Digits allowed. </span>
@@ -114,7 +115,8 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.email.$invalid && regForm.email.$touched }">
-      			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="Enter Email" ng-required="true" >
+      			<!-- Creating an Email input field with Popover -->
+			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="Enter Email" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="We will use this email id for sending you notifications about the current events." >
       			<!--<span class="err" ng-show="regForm.email.$dirty && regForm.email.$invalid"> -->
   				<!-- Error Messages. -->
 				<span class="err" ng-show="regForm.email.$error.required && regForm.email.$touched">Email is required.</span>
