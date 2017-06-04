@@ -62,16 +62,16 @@
   	<div class="col-sm-4" id="boxfeel">
 	<!-- Registration form -->
   	  	<form name = "regForm" class="form-horizontal" ng-submit="submitForm(regForm.$valid)"  novalidate >
-	<!-- Name is entered and Bootstrap styling is done for invalid input -->
+	<!-- Name is entered and Bootstrap styling is done for invalid input field -->
   		<div class="form-group" ng-class="{ 'has-error' : (regForm.fname.$invalid && regForm.fname.$touched) ||  (regForm.lname.$invalid && regForm.lname.$touched)}">
     		<label class="control-label" for="name">Name:</label>
     	</div>
     	<div class="form-group">
     		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.fname.$invalid && regForm.fname.$touched }">
-      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" required>
+      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters." required>
     		</div>
     		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.lname.$invalid && regForm.lname.$touched }">
-      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" required>
+      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters." required>
     		</div>
 		<!-- Error Messages. -->
     		<span class="err" ng-show="(regForm.fname.$touched || regForm.lname.$touched) && (regForm.fname.$error.required || regForm.lname.$error.required)">The field is required. </span><br>
