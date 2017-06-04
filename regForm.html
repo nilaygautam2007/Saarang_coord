@@ -2,15 +2,15 @@
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <head>
-    <title>Registration Page</title>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <style>
-	/*Give box like appearance to the form portion of the page */ 
-	  #boxfeel{
+    	#boxfeel{
 		padding-left:2%;
 		padding-top:2%;
 	    top:0px;
@@ -20,12 +20,13 @@
         border-style:solid;
         border-width: 1px;
         border-radius:20px;
+        opacity: 0.8;
 	}
 
 		.err{
 			color: red;
 		}
-	    
+
 	input::-webkit-outer-spin-button,
    	input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -35,26 +36,26 @@
     </style>
 
   </head>
-  <body background="ep_naturalwhite.png">
-  	
+  <body background="ep_naturalwhite.png" ng-app="myApp" ng-controller="validateCtrl" >
+
   	<h1 align="center">REGISTRATION FORM</h1><br>
-  	
-  	
+
+
   	<div>
   	<div class="col-sm-4">
-  		
+
   	</div>
   	<div class="col-sm-4" id="boxfeel">
-  	  	<form ng-app="myApp" ng-controller="validateCtrl" name = "regForm" class="form-horizontal action="/action_page_post.php" method="post" >
-  		
-  		<div class="form-group">
+  	  	<form name = "regForm" class="form-horizontal" ng-submit="submitForm(regForm.$valid)"  novalidate >
+
+  		<div class="form-group" ng-class="{ 'has-error' : (regForm.fname.$invalid && regForm.fname.$touched) ||  (regForm.lname.$invalid && regForm.lname.$touched)}">
     		<label class="control-label" for="name">Name:</label>
     	</div>
     	<div class="form-group">
-    		<div class="col-sm-5"> 
+    		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.fname.$invalid && regForm.fname.$touched }">
       			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" required>
     		</div>
-    		<div class="col-sm-5"> 
+    		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.lname.$invalid && regForm.lname.$touched }">
       			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" required>
     		</div>
     		<span class="err" ng-show="(regForm.fname.$touched || regForm.lname.$touched) && (regForm.fname.$error.required || regForm.lname.$error.required)">The field is required. </span><br>
@@ -62,11 +63,11 @@
 		<span class="err" ng-show="(regForm.fname.$error.pattern ||regForm.lname.$error.pattern)"> Only Alphabets allowed. </span>
   	</div>
 
-  	<div class="form-group">
+  	<div class="form-group" ng-class="{ 'has-error' : regForm.sid.$invalid && regForm.sid.$touched }">
     		<label class="control-label" for="Saarangid">Saarang ID</label>
     	</div>
-    	<div class="form-group">
-    		<div class="col-sm-10"> 
+    	<div class="form-group" ng-class="{ 'has-error' : regForm.sid.$invalid && regForm.sid.$touched }">
+    		<div class="col-sm-10">
       			<input type="text" name="sid" ng-model="sid" class="form-control" id="Saarangid" placeholder="Enter Saarang id"  required>
       			<span ng-show="regForm.sid.$touched && regForm.sid.$invalid">
       			<span class="err" ng-show="regForm.sid.$error.required">
@@ -75,32 +76,33 @@
 
       			</span>
     		</div>
-    	
+
   	</div>
 
-  		
-  	<div class="form-group">
+
+  	<div class="form-group" ng-class="{ 'has-error' : regForm.mobno.$invalid && regForm.mobno.$touched }">
     		<label class="control-label" for="mobno">Mobile Number</label>
     	</div>
     	<div class="form-group">
-    		<div class="col-sm-10"> 
-      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX">
-      			<span class="err" ng-show="(regForm.mobno.$error.required || regForm.mobno.$error.number)" >Only Numeric Digits allowed.</span>
-          		<span class="err" ng-show="((regForm.mobno.$error.minlength || regForm.mobno.$error.maxlength) && regForm.mobno.$dirty)"> Mobile no. should be of 10 digits </span>
+    		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.mobno.$invalid && regForm.mobno.$touched }">
+      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" >
+      			<span class="err" ng-show="(regForm.mobno.$error.required && regForm.mobno.$touched)" >Field should not be blank.</span>
+            <span class="err" ng-show="regForm.mobno.$error.number"> Only Numeric Digits allowed. </span>
+          	<span class="err" ng-show="((regForm.mobno.$error.minlength || regForm.mobno.$error.maxlength) && regForm.mobno.$dirty)"> Mobile no. should be of 10 digits </span>
 
     		</div>
   	</div>
 
-  	<div class="form-group">
+  	<div class="form-group" ng-class="{ 'has-error' : regForm.email.$invalid && regForm.email.$touched }">
     		<label class="control-label" for="email">Enter Email Id</label>
     	</div>
     	<div class="form-group">
-    		<div class="col-sm-10"> 
-      			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="Enter Email" required>
-      			<span class="err" ng-show="regForm.email.$dirty && regForm.email.$invalid">
-  				<span ng-show="regForm.email.$error.required">Email is required.</span>
-  				<span ng-show="regForm.email.$error.email">Invalid email address.</span>
-  			</span>
+    		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.email.$invalid && regForm.email.$touched }">
+      			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="Enter Email" ng-required="true" >
+      			<!--<span class="err" ng-show="regForm.email.$dirty && regForm.email.$invalid"> -->
+  				<span class="err" ng-show="regForm.email.$error.required && regForm.email.$touched">Email is required.</span>
+  				<span class="err" ng-show="regForm.email.$error.email">Invalid email address.</span>
+  			<!--</span>-->
     		</div>
   	</div>
 
@@ -119,31 +121,51 @@
       			<option>Panache</option>
       		</select>
 
-      
+
   	</div>
 
-  
 
-  	<div class="form-group"> 
+
+  	<div class="form-group">
    		<div class="col-sm-offset-2 col-sm-10">
-      			<button type="submit" class="btn btn-primary" ng-click="register()">Submit</button>
+      			<button type="submit" class="btn btn-primary" ng-disabled="regForm.$invalid" ng-click="resetForm"  >Submit</button>
     		</div>
  	</div>
- 		
 
-  	
+
+
 
   	</form>
   	</div>
   	</div>
 
   	<script>
-var app = angular.module('myApp', []);
-app.controller('validateCtrl', function($scope) {
-    $scope.user = '';
-    $scope.email = '';
+      var app = angular.module('myApp', []);
+      app.controller('validateCtrl', function($scope) {
+      $scope.user = '';
+      $scope.email = '';
+      // function to submit the form after all validation has occurred
+      $scope.submitForm = function(isValid) {
+
+    // check to make sure the form is completely valid
+      if (isValid) {
+      alert('Form submitted successfully!!');
+      regForm.$setPristine();
+
+    }
+
+
+  };
+/*
+   $scope.resetForm = function(){
+      var master = { fname: '' };
+      $scope.temp = angular.copy(master);
+      $scope.regForm.$setPristine();
+
+    }; */
+
 });
 </script>
-  
+
   </body>
   </html>
