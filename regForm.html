@@ -137,10 +137,9 @@
       			<option>Beat Box</option>
       			<option>Panache</option>
       		</select>
-	<!-- Error message -->
-	<span ng-show="regForm.sevent.$error.required && regForm.sevent.$touched">Select an Event</span>
-
-  	</div>
+		<!-- Error message -->
+		<span class="err" ng-show="regForm.sevent.$error.required && regForm.sevent.$touched">Select an Event</span>
+	</div>
 
 
 <!-- Submit button is disabled till all the input fields are filled seccessfully. -->
