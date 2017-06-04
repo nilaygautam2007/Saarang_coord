@@ -107,10 +107,10 @@
   	</div>
 
 
-  	<div class="form-group">
+  	<div class="form-group" ng-class="{ 'has-error' : regForm.sevent.$invalid && regForm.sevent.$touched }">
   		<label class="control-label" for="SelectEvent">Please Select desired Event</label>
   	</div>
-  	<div class="form-group">
+  	<div class="form-group"ng-class="{ 'has-error' : regForm.sevent.$invalid && regForm.sevent.$touched }">
   		<select name="sevent" ng-model="sevent" class="form-control" id="SelectEvent">
   			<option>Events</option>
       			<option>Treasure Hunt</option>
