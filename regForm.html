@@ -34,7 +34,7 @@
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
-	    
+
 /* When mouse hovers over a particular input field then style changes */
   input[type=email]:hover,
   input[type=number]:hover,
@@ -63,16 +63,16 @@
   	<div class="col-sm-4" id="boxfeel">
 	<!-- Registration form -->
   	  	<form name = "regForm" class="form-horizontal" ng-submit="submitForm(regForm.$valid)"  novalidate >
-	<!-- Name is entered and Bootstrap styling is done for invalid input field -->
+	<!-- Name is entered and Bootstrap styling is done for invalid input -->
   		<div class="form-group" ng-class="{ 'has-error' : (regForm.fname.$invalid && regForm.fname.$touched) ||  (regForm.lname.$invalid && regForm.lname.$touched)}">
     		<label class="control-label" for="name">Name:</label>
     	</div>
     	<div class="form-group">
     		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.fname.$invalid && regForm.fname.$touched }">
-      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters." required>
+      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" required data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters.">
     		</div>
     		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.lname.$invalid && regForm.lname.$touched }">
-      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters." required>
+      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" required>
     		</div>
 		<!-- Error Messages. -->
     		<span class="err" ng-show="(regForm.fname.$touched || regForm.lname.$touched) && (regForm.fname.$error.required || regForm.lname.$error.required)">The field is required. </span><br>
@@ -102,7 +102,7 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.mobno.$invalid && regForm.mobno.$touched }">
-      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="Enter a 10 digit Mobile No." >
+      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="Enter a 10 digit Mobile No.">
       			<!-- Error Messages. -->
 			<span class="err" ng-show="(regForm.mobno.$error.required && regForm.mobno.$touched)" >Field should not be blank.</span>
             		<span class="err" ng-show="regForm.mobno.$error.number"> Only Numeric Digits allowed. </span>
@@ -116,8 +116,7 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.email.$invalid && regForm.email.$touched }">
-      			<!-- Creating an Email input field with Popover -->
-			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="Enter Email" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="We will use this email id for sending you notifications about the current events." >
+      			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="someone@example.com" ng-required="true"  data-toggle="popover" data-trigger="hover" data-content="We will use this email id for sending you notifications about the current events." >
       			<!--<span class="err" ng-show="regForm.email.$dirty && regForm.email.$invalid"> -->
   				<!-- Error Messages. -->
 				<span class="err" ng-show="regForm.email.$error.required && regForm.email.$touched">Email is required.</span>
@@ -140,9 +139,10 @@
       			<option>Beat Box</option>
       			<option>Panache</option>
       		</select>
-		<!-- Error message -->
-		<span class="err" ng-show="regForm.sevent.$error.required && regForm.sevent.$touched">Select an Event</span>
-	</div>
+	<!-- Error message -->
+	<span ng-show="regForm.sevent.$error.required && regForm.sevent.$touched">Select an Event</span>
+
+  	</div>
 
 
 <!-- Submit button is disabled till all the input fields are filled seccessfully. -->
@@ -161,9 +161,10 @@
 
   	<script>
       var app = angular.module('myApp', []);
-      app.controller('validateCtrl', function($scope) {
+      app.controller('validateCtrl', function($scope,$sce) {
       $scope.user = '';
       $scope.email = '';
+
       // function to submit the form after all validation has occurred
       $scope.submitForm = function(isValid) {
 
@@ -173,8 +174,7 @@
       regForm.$setPristine();
 
     }
-	 
-});
+
 
   };
 /*
@@ -182,9 +182,11 @@
       $scope.regForm.$setPristine();
 
     }; */
-	$(document).ready(function(){
-    		$('[data-toggle="popover"]').popover();  
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
 });
+
 </script>
 
   </body>
