@@ -69,10 +69,10 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.fname.$invalid && regForm.fname.$touched }">
-      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="fname" required data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters.">
+      			<input type="text" class="form-control" id="name" placeholder="First" name="fname" ng-pattern="/^[a-zA-Z]*$/" ng-model="f1.fname" required data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters.">
     		</div>
     		<div class="col-sm-5" ng-class="{ 'has-error' : regForm.lname.$invalid && regForm.lname.$touched }">
-      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="lname" data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters." required>
+      			<input type="text" class="form-control" id="lname" placeholder="Last" name="lname" ng-pattern="/^[a-zA-Z]*$/" ng-model="f1.lname" data-toggle="popover" data-trigger="hover" data-placement="auto top" data-content="Use only letters." required>
     		</div>
 		<!-- Error Messages. -->
     		<span class="err" ng-show="(regForm.fname.$touched || regForm.lname.$touched) && (regForm.fname.$error.required || regForm.lname.$error.required)">The field is required. </span><br>
@@ -85,7 +85,7 @@
     	</div>
     	<div class="form-group" ng-class="{ 'has-error' : regForm.sid.$invalid && regForm.sid.$touched }">
     		<div class="col-sm-10">
-      			<input type="text" name="sid" ng-model="sid" class="form-control" id="Saarangid" placeholder="Enter Saarang id"  required>
+      			<input type="text" name="sid" ng-model="f1.sid" class="form-control" id="Saarangid" placeholder="Enter Saarang id"  required>
       			<!-- Error Messages. -->
 			<span ng-show="regForm.sid.$touched && regForm.sid.$invalid">
       			<span class="err" ng-show="regForm.sid.$error.required">
@@ -102,7 +102,7 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.mobno.$invalid && regForm.mobno.$touched }">
-      			<input type="number" name="mobno" ng-model="mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="Enter a 10 digit Mobile No.">
+      			<input type="number" name="mobno" ng-model="f1.mobno" class="form-control" id="mobno" ng-minlength="10" ng-maxlength="10" placeholder="XXXXXXXXXX" ng-required="true" data-toggle="popover" data-trigger="hover" data-content="Enter a 10 digit Mobile No.">
       			<!-- Error Messages. -->
 			<span class="err" ng-show="(regForm.mobno.$error.required && regForm.mobno.$touched)" >Field should not be blank.</span>
             		<span class="err" ng-show="regForm.mobno.$error.number"> Only Numeric Digits allowed. </span>
@@ -116,7 +116,7 @@
     	</div>
     	<div class="form-group">
     		<div class="col-sm-10" ng-class="{ 'has-error' : regForm.email.$invalid && regForm.email.$touched }">
-      			<input type="Email" name="email" ng-model="email" class="form-control" id="email" placeholder="someone@example.com" ng-required="true"  data-toggle="popover" data-trigger="hover" data-content="We will use this email id for sending you notifications about the current events." >
+      			<input type="Email" name="email" ng-model="f1.email" class="form-control" id="email" placeholder="someone@example.com" ng-required="true"  data-toggle="popover" data-trigger="hover" data-content="We will use this email id for sending you notifications about the current events." >
       			<!--<span class="err" ng-show="regForm.email.$dirty && regForm.email.$invalid"> -->
   				<!-- Error Messages. -->
 				<span class="err" ng-show="regForm.email.$error.required && regForm.email.$touched">Email is required.</span>
@@ -130,7 +130,7 @@
   		<label class="control-label" for="SelectEvent">Please Select desired Event</label>
   	</div>
   	<div class="form-group"ng-class="{ 'has-error' : regForm.sevent.$invalid && regForm.sevent.$touched }">
-  		<select name="sevent" ng-model="sevent" class="form-control" id="SelectEvent">
+  		<select name="sevent" ng-model="f1.sevent" class="form-control" id="SelectEvent">
   			<option>Events</option>
       			<option>Treasure Hunt</option>
       			<option>Laser Tag</option>
@@ -148,7 +148,7 @@
 <!-- Submit button is disabled till all the input fields are filled seccessfully. -->
   	<div class="form-group">
    		<div class="col-sm-offset-2 col-sm-10">
-      			<button type="submit" class="btn btn-primary" ng-disabled="regForm.$invalid" ng-click="resetForm"  >Submit</button>
+      			<button type="submit" class="btn btn-primary" ng-disabled="regForm.$invalid" ng-click="resetForm()"  >Submit</button>
     		</div>
  	</div>
 
@@ -162,11 +162,19 @@
   	<script>
       var app = angular.module('myApp', []);
       app.controller('validateCtrl', function($scope,$sce) {
-      $scope.user = '';
-      $scope.email = '';
-
+      /*$scope.user = '';
+      $scope.email = ''; */
+	$scope.f1={
+        	fname: "",
+        	lname: "",
+        	sid: "",
+        	mobno: "",
+        	email: ""
+      };
+	var tf1=angular.copy($scope.f1);      
+		      
       // function to submit the form after all validation has occurred
-      $scope.submitForm = function(isValid) {
+     /* $scope.submitForm = function(isValid) {
 
     // check to make sure the form is completely valid
       if (isValid) {
@@ -176,12 +184,13 @@
     }
 
 
-  };
-/*
+  }; */
+
    $scope.resetForm = function(){
+      $scope.f1=angular.copy(tf1);
       $scope.regForm.$setPristine();
 
-    }; */
+    }; 
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover();
     });
