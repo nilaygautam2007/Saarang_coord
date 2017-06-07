@@ -130,7 +130,7 @@
   		<label class="control-label" for="SelectEvent">Please Select desired Event</label>
   	</div>
   	<div class="form-group"ng-class="{ 'has-error' : regForm.sevent.$invalid && regForm.sevent.$touched }">
-  		<select name="sevent" ng-model="f1.sevent" class="form-control" id="SelectEvent">
+  		<select name="sevent" ng-model="f1.sevent" class="form-control" id="SelectEvent" required>
   			<option>Events</option>
       			<option>Treasure Hunt</option>
       			<option>Laser Tag</option>
@@ -140,7 +140,7 @@
       			<option>Panache</option>
       		</select>
 	<!-- Error message -->
-	<span ng-show="regForm.sevent.$error.required && regForm.sevent.$touched">Select an Event</span>
+	<span class="err" ng-show="regForm.sevent.$error.required && regForm.sevent.$touched">Select an Event</span>
 
   	</div>
 
@@ -169,7 +169,8 @@
         	lname: "",
         	sid: "",
         	mobno: "",
-        	email: ""
+        	email: "",
+		sevent: ""
       };
 	var tf1=angular.copy($scope.f1);      
 		      
